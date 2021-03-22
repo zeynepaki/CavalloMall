@@ -27,7 +27,7 @@ import static com.team6project.cavallo_mall.enums.RespStatusAndMsg.*;
 import static com.team6project.cavallo_mall.enums.UserRole.ADMIN;
 
 /**
- * description:
+ * description: Implementing class for product service behaviour
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/19 0:33

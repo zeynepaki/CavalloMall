@@ -22,6 +22,7 @@ public class User {
 
     private Date updateTime;
 
+    // TODO: 21/03/2021 Author: Paul -- should this constructor not also include phoneNo, createTime and updateTime? 
     public User(String username, String password, String email, Integer role) {
         this.username = username;
         this.password = password;

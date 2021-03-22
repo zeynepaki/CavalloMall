@@ -33,7 +33,7 @@ import static com.team6project.cavallo_mall.enums.OrderStatus.UNPAID;
 import static com.team6project.cavallo_mall.enums.RespStatusAndMsg.*;
 
 /**
- * description:
+ * description: Implementing class for payment service behaviour
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/3/7 23:37

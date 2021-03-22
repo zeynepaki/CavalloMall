@@ -5,6 +5,7 @@ import com.team6project.cavallo_mall.model.CartAddedReqModel;
 import com.team6project.cavallo_mall.model.CartUpdateReqModel;
 import com.team6project.cavallo_mall.pojo.User;
 import com.team6project.cavallo_mall.service.impl.CartServiceImpl;
+import com.team6project.cavallo_mall.vo.CartProductVo;
 import com.team6project.cavallo_mall.vo.CartVo;
 import com.team6project.cavallo_mall.vo.RespVo;
 import org.springframework.web.bind.annotation.*;
@@ -22,46 +23,85 @@ import javax.validation.Valid;
 @RestController
 public class CartController {
 
+
     @Resource
     private CartServiceImpl cartService;
 
-
+    /**
+     * add goods to the current user's cart
+     * @param cartAddedReqModel cart object in which objects are to be added
+     * @param session individual user's unique session
+     * @return RespVo<CartVo> of goods to be added to provided cart
+     */
     @PostMapping("/carts/add")
     public RespVo<CartVo> addGoods(@Valid @RequestBody CartAddedReqModel cartAddedReqModel, HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.addGoods(cartAddedReqModel, user.getId());
     }
 
+    /**
+     * find the price of all objects held in the current user's cart
+     * @param session individual user's unique session
+     * @return RespVo<CartVo> with sum price of all objects contained therein
+     */
     @GetMapping("/carts")
     public RespVo<CartVo> findAll(HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.findAll(user.getId());
     }
 
+    /**
+     * Updates quantity of products in current user's cart
+     * @param productId integer value of selected product's ID
+     * @param cartUpdateReqModel cart object to be updated
+     * @param session individual user's unique session
+     * @return updated cartUpdateReqModel object
+     */
     @PutMapping("/carts/{productId}")
     public RespVo<CartVo> updateCart(@PathVariable Integer productId, @Valid @RequestBody CartUpdateReqModel cartUpdateReqModel, HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.updateCart(user.getId(), productId, cartUpdateReqModel);
     }
 
+    /**
+     * Deletes cart from database
+     * @param productId integer value of selected product's ID
+     * @param session individual user's unique session
+     * @return confirmation of whether cart has been deleted
+     */
     @DeleteMapping("/carts/{productId}")
     public RespVo<CartVo> deleteCart(@PathVariable Integer productId, HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.deleteCart(user.getId(), productId);
     }
 
+    /**
+     * Unimplemented method that selects all products in a current user's cart
+     * @param session individual user's unique session
+     * @return a cart with all products selected
+     */
     @PutMapping("/carts/selectAll")
     public RespVo<CartVo> selectAll(HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.selectAll(user.getId());
     }
 
+    /**
+     * Unimplemented method that unselects all products in a current user's cart
+     * @param session individual user's unique session
+     * @return a cart with all products unselected
+     */
     @PutMapping("/carts/unSelectAll")
     public RespVo<CartVo> unSelectAll(HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);
         return cartService.unSelectedAll(user.getId());
     }
 
+    /**
+     * Find the sum quantity of objects in the current user's cart
+     * @param session individual user's unique session
+     * @return integer of total sum of products in cart
+     */
     @GetMapping("/carts/products/sumQuantity")
     public RespVo<Integer> sumQuantity(HttpSession session) {
         User user = (User) session.getAttribute(CavalloConstant.CURRENT_USER);

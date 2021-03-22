@@ -28,7 +28,7 @@ import static com.team6project.cavallo_mall.enums.ProductStatus.IN_STOCK;
 import static com.team6project.cavallo_mall.enums.RespStatusAndMsg.*;
 
 /**
- * description:
+ * description: Implementing class for shopping cart behaviour
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/21 20:21

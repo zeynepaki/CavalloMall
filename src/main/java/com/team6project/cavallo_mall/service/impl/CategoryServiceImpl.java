@@ -19,7 +19,7 @@ import java.util.Set;
 import static com.team6project.cavallo_mall.constants.CavalloConstant.ROOT_PARENT_ID;
 
 /**
- * description:
+ * description: Implementing class for category behaviour
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/18 16:15

@@ -22,7 +22,7 @@ import static com.team6project.cavallo_mall.enums.RespStatusAndMsg.DELIVERY_INFO
 import static com.team6project.cavallo_mall.enums.RespStatusAndMsg.SERVER_ERROR;
 
 /**
- * description:
+ * description: Implementing class for delivery service behaviour
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/23 2:22
