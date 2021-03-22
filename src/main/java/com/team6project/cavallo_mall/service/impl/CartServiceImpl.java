@@ -44,7 +44,23 @@ public class CartServiceImpl implements CartService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-
+    /**
+     * A method that adds goods to the current user's cart.
+     * 1) Validity check for whether the goods exist and whether the goods are available
+     * 2) HashOperations of name hashOperations created with a Key of type String, HashKey of type String,
+     * and Value of type String in JSON format
+     * 3) String named redisBk formed from CART_KEY and uid
+     * 4) String named redisSk formed from productID
+     * 5) shoppingCart declared but not initialised with parameters of productID and quantity
+     * 6) If redisBk and redisSk are NOT assigned to an object within hashOperations, a new shopping cart is initialised
+     * with the given productID and uid; else, the shopping cart is initialised by parsing the String value passed
+     * from hashOperations in JSON format
+     * 7) Using  redisBk and redisSk and the updated/created information of the shopping cart object, the shopping cart is
+     * put into hashOperations in JSON format
+     * @param form CartAddedReqModel to which good are to be added
+     * @param uid integer value of a unique user ID
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<CartVo> addGoods(CartAddedReqModel form, Integer uid) {
         Product product = productMapper.selectByPrimaryKey(form.getProductId());
@@ -80,6 +96,15 @@ public class CartServiceImpl implements CartService {
         return findAll(uid);// return cart query result
     }
 
+    /**
+     * Method that finds the sum total of prices for all products in the current user's cart
+     * 1) HashOperations named hashOperations is created with a String Key, String HashKey, and a String Value
+     * which is in JSON format
+     * 2) String named redisBk formed from CART_KEY and uid
+     * 3) Map (String, String)
+     * @param uid integer value of a unique user ID
+     * @return a cart query result
+     */
     @Override
     public RespVo<CartVo> findAll(Integer uid) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
@@ -127,6 +152,13 @@ public class CartServiceImpl implements CartService {
         return RespVo.success(cartVo);
     }
 
+    /**
+     *
+     * @param uid integer value of a unique user ID
+     * @param productId integer value of a product's ID
+     * @param form
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<CartVo> updateCart(Integer uid, Integer productId, CartUpdateReqModel form) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
@@ -140,8 +172,14 @@ public class CartServiceImpl implements CartService {
 
         hashOperations.put(keyArray[0], keyArray[1], JSON.toJSONString(shoppingCart));
         return findAll(uid);
-        }
+    }
 
+    /**
+     *
+      * @param uid integer value of a unique user ID
+     * @param productId
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<CartVo> deleteCart(Integer uid, Integer productId) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
@@ -154,6 +192,11 @@ public class CartServiceImpl implements CartService {
         return findAll(uid);
     }
 
+    /**
+     *
+     * @param uid integer value of a unique user ID
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<CartVo> selectAll(Integer uid) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
@@ -168,6 +211,11 @@ public class CartServiceImpl implements CartService {
         return findAll(uid);
     }
 
+    /**
+     *
+     * @param uid integer value of a unique user ID
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<CartVo> unSelectedAll(Integer uid) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
@@ -182,6 +230,11 @@ public class CartServiceImpl implements CartService {
         return findAll(uid);
     }
 
+    /**
+     *
+     * @param uid integer value of a unique user ID
+     * @return a cart query result using findAll() method
+     */
     @Override
     public RespVo<Integer> sumQuantity(Integer uid) {
         // Accumulate
@@ -189,12 +242,23 @@ public class CartServiceImpl implements CartService {
         return RespVo.success(sum);
     }
 
+    /**
+     *
+     * @param uid
+     * @param productId
+     * @return a cart query result using findAll() method
+     */
     private String[] redisKeyOperation(Integer uid, Integer productId) {
         String redisBk = String.format(CART_KEY, uid);
         String redisSk = String.valueOf(productId);
         return new String[]{redisBk, redisSk};
     }
 
+    /**
+     *
+     * @param uid
+     * @return a cart query result using findAll() method
+     */
     List<ShoppingCart> traverseCart(Integer uid) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         String redisBk = String.format(CART_KEY, uid);
