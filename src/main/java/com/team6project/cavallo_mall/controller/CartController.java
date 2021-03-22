@@ -31,7 +31,7 @@ public class CartController {
      * add goods to the current user's cart
      * @param cartAddedReqModel cart object in which objects are to be added
      * @param session individual user's unique session
-     * @return RespVo<CartVo> of goods to be added to provided cart
+     * @return a cart query result using findAll() method
      */
     @PostMapping("/carts/add")
     public RespVo<CartVo> addGoods(@Valid @RequestBody CartAddedReqModel cartAddedReqModel, HttpSession session) {
@@ -42,7 +42,7 @@ public class CartController {
     /**
      * find the price of all objects held in the current user's cart
      * @param session individual user's unique session
-     * @return RespVo<CartVo> with sum price of all objects contained therein
+     * @return a cart query result
      */
     @GetMapping("/carts")
     public RespVo<CartVo> findAll(HttpSession session) {
@@ -55,7 +55,7 @@ public class CartController {
      * @param productId integer value of selected product's ID
      * @param cartUpdateReqModel cart object to be updated
      * @param session individual user's unique session
-     * @return updated cartUpdateReqModel object
+     * @return a cart query result using findAll() method
      */
     @PutMapping("/carts/{productId}")
     public RespVo<CartVo> updateCart(@PathVariable Integer productId, @Valid @RequestBody CartUpdateReqModel cartUpdateReqModel, HttpSession session) {
@@ -67,7 +67,7 @@ public class CartController {
      * Deletes cart from database
      * @param productId integer value of selected product's ID
      * @param session individual user's unique session
-     * @return confirmation of whether cart has been deleted
+     * @return a cart query result using findAll() method
      */
     @DeleteMapping("/carts/{productId}")
     public RespVo<CartVo> deleteCart(@PathVariable Integer productId, HttpSession session) {
@@ -78,7 +78,7 @@ public class CartController {
     /**
      * Unimplemented method that selects all products in a current user's cart
      * @param session individual user's unique session
-     * @return a cart with all products selected
+     * @return a cart query result using findAll() method
      */
     @PutMapping("/carts/selectAll")
     public RespVo<CartVo> selectAll(HttpSession session) {
@@ -89,7 +89,7 @@ public class CartController {
     /**
      * Unimplemented method that unselects all products in a current user's cart
      * @param session individual user's unique session
-     * @return a cart with all products unselected
+     * @return a cart query result using findAll() method
      */
     @PutMapping("/carts/unSelectAll")
     public RespVo<CartVo> unSelectAll(HttpSession session) {
