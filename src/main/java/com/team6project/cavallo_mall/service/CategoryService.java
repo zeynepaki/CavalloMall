@@ -15,14 +15,14 @@ import java.util.Set;
 public interface CategoryService {
 
     /**
-     *
-     * @return
+     * Method that finds all categories and returns them as a List
+     * @return RespVo Collection of Lists of CategoryVo (multidimensional array)
      */
     RespVo<List<CategoryVo>> findAllCategory();
 
     /**
-     *
-     * @param id
+     * Method that finds all subcategory IDs
+     * @param id integer that giving a unique id for the category
      * @param resultSet
      */
     void findSubCategoryId(Integer id, Set<Integer> resultSet);
