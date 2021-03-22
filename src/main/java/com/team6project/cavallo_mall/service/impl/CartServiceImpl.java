@@ -101,7 +101,27 @@ public class CartServiceImpl implements CartService {
      * 1) HashOperations named hashOperations is created with a String Key, String HashKey, and a String Value
      * which is in JSON format
      * 2) String named redisBk formed from CART_KEY and uid
-     * 3) Map (String, String)
+     * 3) Map (String, String) called entries is initialised with the entries present in hashOperations
+     * 4) An ArrayList of CartProductVo is created
+     * 5) cartTotalPrice is set to zero
+     * 6) For each entry in the entries Map;
+     *   a) ShoppingCart is initialised by parsing the String in the JSON format
+     *   b) A product object is declared with the given productID from the shoppingCart
+     *     i)If the product is not null, the total price is calculated  and a new CartProductVO is initialised using:
+     *       -The value of quantity from the shopping cart
+     *       -The product name
+     *       -The product subtitle
+     *       -The product main image
+     *       -The product price
+     *       -The product status
+     *       -The total price
+     *       -The quantity that has been sold of the product
+     *       -The product selected
+     *     ii) The CartProductVo initialised is added to CartProductVoList
+     *     iii) If the productSelected boolean is false, Boolean isSelected is set to false
+     *     iv) vi.	If the productSelected Boolean is true, the cartTotalPrice is updated with the productTotalPrice
+     *   c) totalQuantity is updated
+     * 7)New CartVo is declared with relevant information
      * @param uid integer value of a unique user ID
      * @return a cart query result
      */
@@ -153,7 +173,20 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     *1) HashOperations named hashOperations is created with a String Key, String HashKey, and a String Value
+     * which is in JSON format
+     *2) An array of type String called keyArray using the redisKeyOperation method which takes uid and
+     * productID forming a String Array.
+     *3) A new string is initialised called cartJSON that represents the cart by getting the value from HashOperations with the
+     *  values within the keyArray Array as keys.
+     *4) If cartJSON String is empty,  en error occurs.
+     *5) ShoppingCart shoppingCart is initialised with the values parsed from the cartJSON String.
+     *6) If the quantity parameter of the CartUpdateReqModel parameter is not null and higher than or equal to zero,
+     * the quantity of shoppingCart is set qual to the quantity of the form parameter.
+     *7) If the result of the getSelected() method for the form parameter is not null, the product for shoppingCart is set equal
+     *  to the productSelected of form parameter.
+     *8) using the index 0 as KEy and index 1 as HashKey from the keyArray Array shoppingCart is converted into JSON format
+     * and put into hashOperations.
      * @param uid integer value of a unique user ID
      * @param productId integer value of a product's ID
      * @param form
@@ -164,7 +197,9 @@ public class CartServiceImpl implements CartService {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         String[] keyArray = redisKeyOperation(uid, productId);
         String cartJson = hashOperations.get(keyArray[0], keyArray[1]);
-        if (Strings.isEmpty(cartJson)) return RespVo.error(CART_GOODS_NOT_EXIST);
+        if (Strings.isEmpty(cartJson)){
+            return RespVo.error(CART_GOODS_NOT_EXIST);
+        }
         ShoppingCart shoppingCart = JSON.parseObject(cartJson, ShoppingCart.class);
         if (form.getQuantity() != null && form.getQuantity() >= 0) shoppingCart.setQuantity(form.getQuantity());
 
