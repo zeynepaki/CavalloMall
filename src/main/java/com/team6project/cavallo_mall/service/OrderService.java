@@ -51,7 +51,7 @@ public interface OrderService {
 
     /**
      * Not implemented, here for future improvements
-     * This method counts how many products have been sold by day.
+     * This method counts how many orders have been placed by day.
      * @param roleId could be admin 1 or customer 0
      * @return order query result
      */
@@ -59,7 +59,7 @@ public interface OrderService {
 
     /**
      * Not implemented, here for future improvements
-     * The method counts how many products have been sold by week
+     * The method counts how many orders have been placed by week
      * @param roleId could be admin 1 customer 0
      * @return order query result
      */
@@ -67,7 +67,7 @@ public interface OrderService {
 
     /**
      * Not implemented, here for future improvements
-     * The method counts how many products have been sold by month
+     * The method counts how many orders have been placed by month
      * @param roleId could be admin 1 customer 0
      * @return order query result
      */

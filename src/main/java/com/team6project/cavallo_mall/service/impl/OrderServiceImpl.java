@@ -57,7 +57,13 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private SeqUtil seqUtil;
 
-
+    /**
+     * Not implemented, here for future improvements
+     * This method cancels Orders by user id and order number
+     * @param uid integer representing a unique user ID
+     * @param orderNo String value representing a unique order number
+     * @return a query
+     */
     @Override
     public RespVo cancelOrderByUidAndOrderNo(Integer uid, String orderNo) {
         Order order = orderMapper.selectByOrderNo(orderNo);
@@ -71,6 +77,12 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success();
     }
 
+    /**
+     * This method is used to create an order
+     * @param uid integer representing a unique user ID
+     * @param deliverId
+     * @return a orderVo query
+     */
     @Override
     public RespVo<OrderVo> createOrder(Integer uid, Integer deliverId) {
         // 1. Deliver address verification
@@ -123,6 +135,14 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(orderVo);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method is used to find orders by user id
+     * @param uid integer representing a unique user ID
+     * @param pageNum integer value of the page where the delivery info is stored
+     * @param pageSize integer value of how many delivery entries are displayed per page
+     * @return a pageInfo query
+     */
     @Override
     public RespVo<PageInfo> findOrderByUid(Integer uid, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -144,6 +164,13 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(pageInfo);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method is used to find order details of a given customer and order number
+     * @param uid integer representing a unique user ID
+     * @param orderNo String value representing a unique order number
+     * @return a orderVo query
+     */
     @Override
     public RespVo<OrderVo> findOrderDetail(Integer uid, String orderNo) {
         Order order = orderMapper.selectByOrderNo(orderNo);
@@ -154,6 +181,12 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(orderVo);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method is used to find how many orders have been placed by day
+     * @param roleId could be admin 1 or customer 0
+     * @return
+     */
     @Override
     public RespVo<List<OrderQuantityOfDayVo>> findOrderQuantityByDay(Integer roleId) {
         if (! ADMIN.getCode().equals(roleId)) return RespVo.error(USER_ROLE_ERROR);
@@ -162,6 +195,12 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(orderQuantityOfDayVoList);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method counts how many orders have been placed by week
+     * @param roleId could be admin 1 customer 0
+     * @return orderQuantityOfWeekList query
+     */
     @Override
     public RespVo<List<OrderQuantityOfWeekVo>> findOrderQuantityByWeek(Integer roleId) {
         if (! ADMIN.getCode().equals(roleId)) return RespVo.error(USER_ROLE_ERROR);
@@ -170,6 +209,12 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(orderQuantityOfWeekList);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method counts how many orders have been placed by month
+     * @param roleId could be admin 1 customer 0
+     * @return orderQuantityOfMonthList query
+     */
     @Override
     public RespVo<List<OrderQuantityOfMonthVo>> findOrderQuantityByMonth(Integer roleId) {
         if (! ADMIN.getCode().equals(roleId)) return RespVo.error(USER_ROLE_ERROR);
@@ -178,6 +223,14 @@ public class OrderServiceImpl implements OrderService {
         return RespVo.success(orderQuantityOfMonthVoList);
     }
 
+    /**
+     * This method builds an OrderDetail from given parameters
+     * @param uid user id
+     * @param orderNo order number
+     * @param quantity quantity
+     * @param product product
+     * @return orderDetail
+     */
     private OrderDetail buildOrderDetail(Integer uid, String orderNo, Integer quantity, Product product) {
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setUserId(uid);
@@ -192,6 +245,14 @@ public class OrderServiceImpl implements OrderService {
         return orderDetail;
     }
 
+    /**
+     * This method is used to create an order with given parameters
+     * @param orderNo order number
+     * @param uid user id
+     * @param deliveryId delivery id
+     * @param orderDetailList a list of OrderDetail
+     * @return order
+     */
     private Order buildOrder(String orderNo, Integer uid, Integer deliveryId, List<OrderDetail> orderDetailList) {
         Order order = new Order();
         order.setOrderNo(orderNo);
@@ -203,10 +264,21 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    /**
+     * used to create an order number
+     * @return order number
+     */
     private String generateOrderNo() {
         return seqUtil.nextNum(RedisKey.ORDER_NO_IN_REDIS, 8);
     }
 
+    /**
+     * This method is used to create OrderVo
+     * @param order order
+     * @param orderDetailList a List of OrderDetail
+     * @param delivery Delivery
+     * @return orderVo
+     */
     private OrderVo buildOrderVo(Order order, List<OrderDetail> orderDetailList, Delivery delivery) {
         OrderVo orderVo = new OrderVo();
         Objects.fillTargetObject(order,orderVo);
