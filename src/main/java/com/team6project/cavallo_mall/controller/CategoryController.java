@@ -25,7 +25,11 @@ public class CategoryController {
     @Resource
     private CategoryServiceImpl categoryService;
 
-
+    // TODO: 23/03/2021 finish this javadocs 
+    /**
+     * 
+     * @return
+     */
     @GetMapping("/findAllCategories")
     public RespVo<List<CategoryVo>> findAllCategory() {
         return categoryService.findAllCategory();
