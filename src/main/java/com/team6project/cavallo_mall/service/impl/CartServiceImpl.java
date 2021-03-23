@@ -210,9 +210,17 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     *1) HashOperations named hashOperations is created with a String Key, String HashKey, and a String Value
+     * which is in JSON format
+     *2) An array of type String called keyArray using the redisKeyOperation method which takes uid and
+     * productID forming a String Array.
+     *3) A new string is initialised called cartJSON that represents the cart by getting the value from HashOperations with the
+     *  values within the keyArray Array as keys.
+     *4) If cartJSON String is empty,  en error occurs.
+     *5) String that represents the shoppingCart is deleted from hashOperations using the index0 of the keyArray as KEY and index2
+     * of the keyArray as HashKEY
       * @param uid integer value of a unique user ID
-     * @param productId
+     * @param productId represents the productID
      * @return a cart query result using findAll() method
      */
     @Override
