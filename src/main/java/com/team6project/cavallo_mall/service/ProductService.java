@@ -25,6 +25,7 @@ public interface ProductService {
     RespVo<PageInfo> productList(Integer categoryId, Integer pageNum, Integer pageSize);
 
     /**
+     * Not implemented, here for future improvements
      * Method that provides product details
      * @param productId integer representing a unique product ID
      * @return a product service query result indicating whether the product's details have been successfully returned
@@ -32,6 +33,7 @@ public interface ProductService {
     RespVo<ProductDetailsVo> productDetail(Integer productId);
 
     /**
+     * Not implemented, here for future improvements
      * Method that finds a product's sales quantity
      * Only permits a successful query where the user is an admin (userRole == 1)
      * @param categoryId integer that represents a product's category ID
@@ -41,6 +43,7 @@ public interface ProductService {
     RespVo<ProductSalesStatisticVo> findProductSalesQuantity(Integer categoryId, Integer userRole);
 
     /**
+     * Not implemented, here for future improvements
      * Method that finds product sales quantities and adds them to a List
      * Only permits a successful query where the user is an admin (userRole == 1)
      * @param userRole integer that represents the user's role (0 for customer, 1 for admin)

@@ -14,6 +14,7 @@ import java.util.List;
 public interface OrderService {
 
     /**
+     * Not implemented, here for future improvements
      * Method that cancels an order by using a user ID (uid) and an order number (orderNo)
      * @param uid integer representing a unique user ID
      * @param orderNo String value representing a unique order number
@@ -30,6 +31,7 @@ public interface OrderService {
     RespVo<OrderVo> createOrder(Integer uid, Integer shippingId);
 
     /**
+     * Not implemented, here for future improvements
      * Method that finds an order given a user ID (uid)
      * @param uid integer representing a unique user ID
      * @param pageNum integer value of the page where the delivery info is stored
@@ -39,6 +41,7 @@ public interface OrderService {
     RespVo<PageInfo> findOrderByUid(Integer uid, Integer pageNum, Integer pageSize);
 
     /**
+     * Not implemented, here for future improvements
      * Method that finds an order's details given a user ID (uid) and an order number (orderNo)
      * @param uid integer representing a unique user ID
      * @param orderNo String value representing a unique order number
@@ -46,24 +49,26 @@ public interface OrderService {
      */
     RespVo<OrderVo> findOrderDetail(Integer uid, String orderNo);
 
-    // TODO: 23/03/2021 finish writing javadocs 
     /**
-     * 
-     * @param roleId
+     * Not implemented, here for future improvements
+     * This method counts how many products have been sold by day.
+     * @param roleId could be admin 1 or customer 0
      * @return order query result
      */
     RespVo<List<OrderQuantityOfDayVo>> findOrderQuantityByDay(Integer roleId);
 
     /**
-     *
-     * @param roleId
+     * Not implemented, here for future improvements
+     * The method counts how many products have been sold by week
+     * @param roleId could be admin 1 customer 0
      * @return order query result
      */
     RespVo<List<OrderQuantityOfWeekVo>> findOrderQuantityByWeek(Integer roleId);
 
     /**
-     *
-     * @param roleId
+     * Not implemented, here for future improvements
+     * The method counts how many products have been sold by month
+     * @param roleId could be admin 1 customer 0
      * @return order query result
      */
     RespVo<List<OrderQuantityOfMonthVo>> findOrderQuantityByMonth(Integer roleId);

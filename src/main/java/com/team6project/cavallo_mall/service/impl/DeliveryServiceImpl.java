@@ -36,6 +36,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     private DeliveryMapper deliveryMapper;
 
     /**
+     * Not implemented, here for future improvements
      *This method is used to create a delivery and assign it to a user.
      * @param uid user id
      * @param deliveryReqModel DeliveryReqModel
@@ -55,6 +56,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     /**
+     * Not implemented, here for future improvements
      * This method is used to delete delivery information of a given user and delivery id
      * @param uid user id
      * @param deliverId delivery id
@@ -68,6 +70,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     /**
+     * Not implemented, here for future improvements
      * This method updates delivery information of given user and delivery
      * @param uid user id
      * @param deliverId delivery id

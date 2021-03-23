@@ -14,6 +14,7 @@ import com.team6project.cavallo_mall.vo.RespVo;
 public interface DeliveryService {
 
     /**
+     * Not implemented, here for future improvements
      * adds delivery information
      * @param uid integer value of a unique user ID
      * @param deliveryReqModel DeliveryReqModel
@@ -23,6 +24,7 @@ public interface DeliveryService {
 
 
     /**
+     * Not implemented, here for future improvements
      * deletes delivery information
      * @param uid integer value of a unique user ID
      * @param deliveryId Integer representing a unique deliveryID
@@ -31,6 +33,7 @@ public interface DeliveryService {
     RespVo deleteDeliveryInfo(Integer uid, Integer deliveryId);
 
     /**
+     * Not implemented, here for future improvements
      * updates delivery information
      * @param uid integer value of a unique user ID
      * @param deliveryId Integer representing a unique deliveryID
@@ -40,6 +43,7 @@ public interface DeliveryService {
     RespVo updateDeliveryInfo(Integer uid, Integer deliveryId, DeliveryReqModel deliveryReqModel);
 
     /**
+     * Not implemented, here for future improvements
      * finds all delivery information
      * @param uid integer value of a unique user ID
      * @param pageNum integer value of the page where the delivery info is stored
