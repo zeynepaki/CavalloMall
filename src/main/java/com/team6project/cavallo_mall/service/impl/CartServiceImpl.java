@@ -217,7 +217,7 @@ public class CartServiceImpl implements CartService {
      *3) A new string is initialised called cartJSON that represents the cart by getting the value from HashOperations with the
      *  values within the keyArray Array as keys.
      *4) If cartJSON String is empty,  en error occurs.
-     *5) String that represents the shoppingCart is deleted from hashOperations using the index0 of the keyArray as KEY and index2
+     *5) String that represents the shoppingCart is deleted from hashOperations using the index0 of the keyArray as KEY and index1
      * of the keyArray as HashKEY
       * @param uid integer value of a unique user ID
      * @param productId represents the productID
@@ -236,7 +236,8 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     *This method selects all items present within the basket. It is not currently implemented and is only present
+     * for future improvements.
      * @param uid integer value of a unique user ID
      * @return a cart query result using findAll() method
      */
@@ -255,7 +256,8 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     *This method sets the selection of all items within the cart as unselected. It is not currently implemented and
+     * is only present for future improvements.
      * @param uid integer value of a unique user ID
      * @return a cart query result using findAll() method
      */
@@ -286,10 +288,12 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
-     * @param uid
-     * @param productId
-     * @return a cart query result using findAll() method
+     * Given a uid and a productID,
+     * String redisBK is initialised using the CART_KEY and uid,
+     * String redisSK is initialised with productID
+     * @param uid integer representation of userID
+     * @param productId integer representation of productID
+     * @return a new Array of type String with redisBK at index0 and redisSK at index1
      */
     private String[] redisKeyOperation(Integer uid, Integer productId) {
         String redisBk = String.format(CART_KEY, uid);
@@ -299,8 +303,8 @@ public class CartServiceImpl implements CartService {
 
     /**
      *
-     * @param uid
-     * @return a cart query result using findAll() method
+     * @param uid integer representation of userID
+     * @return a List of ShoppingCart
      */
     List<ShoppingCart> traverseCart(Integer uid) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
