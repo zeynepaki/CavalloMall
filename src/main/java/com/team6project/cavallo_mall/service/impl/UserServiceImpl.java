@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * This method id used to register a new user to the database.
+     * @param user User object representing a user
+     * @return a query
+     */
     @Override
     public RespVo<User> register(User user) {
         int countByUsername = userMapper.countByUsername(user.getUsername());
@@ -44,6 +49,12 @@ public class UserServiceImpl implements UserService {
         return RespVo.success();
     }
 
+    /**
+     * This method is invoked when users want to login to their accounts
+     * @param username String representing a user's username
+     * @param password String representing a user's password
+     * @return user query
+     */
     @Override
     public RespVo<User> login(String username, String password) {
         /*User user = userMapper.selectByUsername(username);
@@ -59,6 +70,12 @@ public class UserServiceImpl implements UserService {
         return RespVo.success(user);
     }
 
+    /**
+     * This method is used for admin login
+     * @param username admin username
+     * @param password password for admin
+     * @return user query
+     */
     public RespVo<User> loginForAdmin(String username, String password) {
         User user = verifyUser(username, password);
         if (user == null) return RespVo.error(USERNAME_OR_PASSWORD_ERROR);
@@ -66,6 +83,13 @@ public class UserServiceImpl implements UserService {
         return RespVo.success(user);
     }
 
+    /**
+     * This method is used to check if a user is a valid user.
+     * @param username user username
+     * @param password user password
+     * @return the user relating to the given username and password, returns null if the user
+     * is null or if the user's password  is not in Charset-UTF8
+     */
     private User verifyUser(String username, String password) {
         User user = userMapper.selectByUsername(username);
         if (user == null || ! user.getPassword().equalsIgnoreCase(DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)))) return null;
