@@ -71,11 +71,11 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     /**
      * Not implemented, here for future improvements
-     * This method updates delivery information of given user and delivery
+     * This method updates delivery information of given user and delivery id
      * @param uid user id
      * @param deliverId delivery id
-     * @param deliveryReqModel
-     * @return
+     * @param deliveryReqModel DeliveryReqModel
+     * @return a query
      */
     @Override
     public RespVo updateDeliveryInfo(Integer uid, Integer deliverId, DeliveryReqModel deliveryReqModel) {
@@ -89,11 +89,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     /**
-     *
-     * @param uid
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * Not implemented, here for future improvements
+     * This method finds all delivery information
+     * @param uid user id
+     * @param pageNum int page number
+     * @param pageSize int page size
+     * @return a pageInfo query
      */
     @Override
     public RespVo<PageInfo> findAllDeliveryInfo(Integer uid, Integer pageNum, Integer pageSize) {
