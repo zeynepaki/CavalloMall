@@ -12,17 +12,17 @@ import com.team6project.cavallo_mall.vo.RespVo;
 public interface UserService {
 
     /**
-     * register
-     * @param user
-     * @return
+     * Method that registers a user in the database
+     * @param user User object representing a user
+     * @return a user service query result indicating whether a user has been successfully registered or not
      */
     RespVo<User> register(User user);
 
     /**
-     * login
-     * @param username
-     * @param password
-     * @return
+     * Method that logs a user into the system
+     * @param username String representing a user's username
+     * @param password String representing a user's password
+     * @return a user service query result indicating whether a user has been successfully logged in or not
      */
     RespVo<User> login(String username, String password);
 }
