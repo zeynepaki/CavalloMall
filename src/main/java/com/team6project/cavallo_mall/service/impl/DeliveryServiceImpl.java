@@ -35,6 +35,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Resource
     private DeliveryMapper deliveryMapper;
 
+    /**
+     *This method is used to create a delivery and assign it to a user.
+     * @param uid user id
+     * @param deliveryReqModel DeliveryReqModel
+     * @return a deliveryVo query
+     */
     @Override
     public RespVo<DeliveryVo> addDeliveryInfo(Integer uid, DeliveryReqModel deliveryReqModel) {
         Delivery delivery = new Delivery();
@@ -48,6 +54,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         return RespVo.success(deliveryVo);
     }
 
+    /**
+     * This method is used to delete delivery information of a given user and delivery id
+     * @param uid user id
+     * @param deliverId delivery id
+     * @return a query
+     */
     @Override
     public RespVo deleteDeliveryInfo(Integer uid, Integer deliverId) {
         int count = deliveryMapper.deleteByIdAndUid(uid, deliverId);
@@ -55,6 +67,13 @@ public class DeliveryServiceImpl implements DeliveryService {
         return RespVo.success();
     }
 
+    /**
+     * This method updates delivery information of given user and delivery
+     * @param uid user id
+     * @param deliverId delivery id
+     * @param deliveryReqModel
+     * @return
+     */
     @Override
     public RespVo updateDeliveryInfo(Integer uid, Integer deliverId, DeliveryReqModel deliveryReqModel) {
         Delivery delivery = new Delivery();
@@ -66,6 +85,13 @@ public class DeliveryServiceImpl implements DeliveryService {
         return RespVo.success();
     }
 
+    /**
+     *
+     * @param uid
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public RespVo<PageInfo> findAllDeliveryInfo(Integer uid, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
