@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * description:
+ * description: Interface for product "categories" that represent types of product. For example, "ice-cream" or
+ * "drink". The "ice-cream" category has subcategories which represent flavours
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/18 16:08
@@ -23,7 +24,7 @@ public interface CategoryService {
     /**
      * Method that finds all subcategory IDs
      * @param id integer that giving a unique id for the category
-     * @param resultSet
+     * @param resultSet a Set of integers which represent categoryIDs
      */
     void findSubCategoryId(Integer id, Set<Integer> resultSet);
 }

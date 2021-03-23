@@ -6,24 +6,65 @@ import com.team6project.cavallo_mall.vo.*;
 import java.util.List;
 
 /**
- * description:
+ * description: Interface for orders
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/24 19:14
  */
 public interface OrderService {
 
+    /**
+     * Method that cancels an order by using a user ID (uid) and an order number (orderNo)
+     * @param uid integer representing a unique user ID
+     * @param orderNo String value representing a unique order number
+     * @return order query result identifying whether the order has been cancelled or not
+     */
     RespVo cancelOrderByUidAndOrderNo(Integer uid, String orderNo);
 
+    /**
+     * Method that creates an order given a user ID (uid) and a shipping ID
+     * @param uid integer representing a unique user ID
+     * @param shippingId integer representing a unique shipping ID
+     * @return order query result identifying whether an order has been created or not
+     */
     RespVo<OrderVo> createOrder(Integer uid, Integer shippingId);
 
+    /**
+     * Method that finds an order given a user ID (uid)
+     * @param uid integer representing a unique user ID
+     * @param pageNum integer value of the page where the delivery info is stored
+     * @param pageSize integer value of how many delivery entries are displayed per page
+     * @return order query result identifying whether an order has been found by uid or not
+     */
     RespVo<PageInfo> findOrderByUid(Integer uid, Integer pageNum, Integer pageSize);
 
+    /**
+     * Method that finds an order's details given a user ID (uid) and an order number (orderNo)
+     * @param uid integer representing a unique user ID
+     * @param orderNo String value representing a unique order number
+     * @return order query result identifying whether an OrderDetail has been found or not
+     */
     RespVo<OrderVo> findOrderDetail(Integer uid, String orderNo);
 
+    // TODO: 23/03/2021 finish writing javadocs 
+    /**
+     * 
+     * @param roleId
+     * @return order query result
+     */
     RespVo<List<OrderQuantityOfDayVo>> findOrderQuantityByDay(Integer roleId);
 
+    /**
+     *
+     * @param roleId
+     * @return order query result
+     */
     RespVo<List<OrderQuantityOfWeekVo>> findOrderQuantityByWeek(Integer roleId);
 
+    /**
+     *
+     * @param roleId
+     * @return order query result
+     */
     RespVo<List<OrderQuantityOfMonthVo>> findOrderQuantityByMonth(Integer roleId);
 }

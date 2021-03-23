@@ -43,7 +43,6 @@ public class CartProductVo {
      */
     private boolean productSelected;
 
-    // TODO: 21/03/2021 Author: Paul -- should variables for the value objects not all be final? Ordinarily you might impose immutability by not providing setter methods, but does lombok not get around that?
     public CartProductVo(Integer productId, Integer quantity, String productName, String productSubtitle, String productMainImage, BigDecimal productPrice, Integer productStatus, BigDecimal productTotalPrice, Integer quantitySold, boolean productSelected) {
         this.productId = productId;
         this.quantity = quantity;

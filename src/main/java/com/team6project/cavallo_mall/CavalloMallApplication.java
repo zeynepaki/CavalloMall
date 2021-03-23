@@ -14,7 +14,7 @@ import java.util.TimeZone;
 public class CavalloMallApplication {
 
     public static void main(String[] args) {
-        // TODO: 22/03/2021 check time zone - should it be Asia/Shanghai default for UK company?
+        // TODO: 22/03/2021 check that time zone matches in database and Java backend
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
         SpringApplication.run(CavalloMallApplication.class, args);
     }

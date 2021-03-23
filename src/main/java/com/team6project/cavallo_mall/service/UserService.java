@@ -4,7 +4,7 @@ import com.team6project.cavallo_mall.pojo.User;
 import com.team6project.cavallo_mall.vo.RespVo;
 
 /**
- * description:
+ * description: Interface for users
  * author: Yuchen Bai
  * email: y.bai19@newcastle.ac.uk
  * date: 2021/2/9 2:29
