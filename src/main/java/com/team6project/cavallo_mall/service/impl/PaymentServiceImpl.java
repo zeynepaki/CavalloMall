@@ -55,6 +55,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * This method is used to create RespVo of PaymentVo
+     * @param uid integer that represents a unique user ID
+     * @param orderNo String that represents a unique orderNo
+     * @return
+     */
+
     @Override
     public RespVo<PaymentVo> createPayment(Integer uid, String orderNo) {
         Order order = orderMapper.selectByOrderNoAndUid(uid, orderNo);
@@ -76,6 +83,12 @@ public class PaymentServiceImpl implements PaymentService {
         return RespVo.success(buildPaymentVo(payment));
     }
 
+    /**
+     * This method is used to implement the horsePayAPI into the payment.
+     * @param order Order
+     * @param username customer username
+     * @return horsePayVo
+     */
     private HorsePayVo buildHorsePayVo(Order order, String username) {
         HorsePayVo horsePayVo = new HorsePayVo();
         horsePayVo.setForcePaymentSatusReturnType(true);
@@ -94,6 +107,13 @@ public class PaymentServiceImpl implements PaymentService {
         return horsePayVo;
     }
 
+    /**
+     *This method initialises a new payment object using data from a given order and username
+     * @param horsePayRespModel horsePayRespModel
+     * @param order Order
+     * @param username username
+     * @return a new Payment object, returns null if horsePayRespModel is null or the payment wasn't successful.
+     */
     private Payment buildPayment(HorsePayRespModel horsePayRespModel, Order order, String username) {
         if (horsePayRespModel == null) return null;
         HorsePayRespSuccessModel paymentSuccess = horsePayRespModel.getPaymetSuccess();
@@ -109,6 +129,11 @@ public class PaymentServiceImpl implements PaymentService {
         return payment;
     }
 
+    /**
+     * This method is used to create a new PaymentVo object from a Payment object
+     * @param payment payment
+     * @return paymentVo
+     */
     private PaymentVo buildPaymentVo(Payment payment) {
         PaymentVo paymentVo = new PaymentVo();
         Objects.fillTargetObject(payment, paymentVo);
