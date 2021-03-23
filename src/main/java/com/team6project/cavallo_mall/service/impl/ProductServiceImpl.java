@@ -42,6 +42,13 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private CategoryService categoryService;
 
+    /**
+     * This method creates a list of products in a page.
+     * @param categoryId integer representing the categoryID of a product
+     * @param pageNum integer representing the page number
+     * @param pageSize integer representing the number of entries per page
+     * @return pageInfo query
+     */
     @Override
     public RespVo<PageInfo> productList(Integer categoryId, Integer pageNum, Integer pageSize) {
         Set<Integer> categoryIdSet = new HashSet<>();
@@ -61,6 +68,13 @@ public class ProductServiceImpl implements ProductService {
         return RespVo.success(pageInfo);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method generates a new ProductDetailsVo if the product is not out of stock or deleted from
+     * the given productID of a product
+     * @param productId integer representing a unique product ID
+     * @return productDetailsVo query
+     */
     @Override
     public RespVo<ProductDetailsVo> productDetail(Integer productId) {
         Product product = productMapper.selectByPrimaryKey(productId);
@@ -72,6 +86,13 @@ public class ProductServiceImpl implements ProductService {
         return RespVo.success(productDetailsVo);
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method finds how many items of a given productID has been sold
+     * @param categoryId integer that represents a product's category ID
+     * @param userRole integer that represents the user's role (0 for customer, 1 for admin)
+     * @return productSalesQuantity query
+     */
     @Override
     public RespVo<ProductSalesStatisticVo> findProductSalesQuantity(Integer categoryId, Integer userRole) {
         if (! ADMIN.getCode().equals(userRole)) return RespVo.error(USER_ROLE_ERROR);
@@ -81,6 +102,12 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    /**
+     * Not implemented, here for future improvements
+     * This method initialises a list of product quantities sold.
+     * @param userRole integer that represents the user's role (0 for customer, 1 for admin)
+     * @return productSales query
+     */
     @Override
     public RespVo<List<ProductSalesStatisticVo>> findProductSalesQuantityList(Integer userRole) {
         if (! ADMIN.getCode().equals(userRole)) return RespVo.error(USER_ROLE_ERROR);
