@@ -5,6 +5,12 @@ import com.team6project.cavallo_mall.pojo.Category;
 import java.util.List;
 
 public interface CategoryMapper {
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     int deleteByPrimaryKey(Integer id);
 
     int insert(Category record);
