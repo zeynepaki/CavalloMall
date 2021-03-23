@@ -276,9 +276,9 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     * For each item in the shopping cart of the user, the quantity is summed up.
      * @param uid integer value of a unique user ID
-     * @return a cart query result using findAll() method
+     * @return a cart query result
      */
     @Override
     public RespVo<Integer> sumQuantity(Integer uid) {
@@ -302,7 +302,15 @@ public class CartServiceImpl implements CartService {
     }
 
     /**
-     *
+     * 1) HashOperations named hashOperations is created with a String Key, String HashKey, and a String Value
+     * which is in JSON format
+     * 2) String named redisBk formed from CART_KEY and uid
+     * 3) Map (String, String) called entries is initialised with the entries present in hashOperations
+     * with the redisBK KEY
+     * 4) A new ArrayList of ShoppingCart is declared as shoppingCartList.
+     * 5) For every entry in the entries map,
+     * a ShoppingCart object with the values gotten from the String retrieved with redisBK from hashOperation
+     * in the JSON format and is added to shoppingCartList.
      * @param uid integer representation of userID
      * @return a List of ShoppingCart
      */
