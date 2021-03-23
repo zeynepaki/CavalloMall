@@ -140,7 +140,6 @@ public class CartServiceImpl implements CartService {
             Integer productId = Integer.valueOf(entry.getKey());
             // Deserialization to cart object
             ShoppingCart shoppingCart = JSON.parseObject(entry.getValue(), ShoppingCart.class);
-            // TODO use 'in' to substitute
             Product product = productMapper.selectByPrimaryKey(productId);
             if (product != null) {
                 // calculate total price

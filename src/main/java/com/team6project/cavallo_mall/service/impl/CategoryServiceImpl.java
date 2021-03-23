@@ -32,6 +32,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Resource
     private CategoryMapper categoryMapper;
 
+    /**
+     *This method finds all the Categories present in the database by,
+     * 1) A list of Categories called categories is initialised by selecting all categories
+     * from the category mapper.
+     * 2) A new list of CategoryVo called categoryVoList is created.
+     * 3) For each category in categories, if the ROOT_PARENT_ID is equal to the category parent ID,
+     * CategoryVO is initialised as the category.
+     * 4) CategoryVOLIST is sorted in descending order
+     * 5) subcategories are queried.
+     * @return category query  result
+     */
+
     @Override
     public RespVo<List<CategoryVo>> findAllCategory() {
         List<Category> categories = categoryMapper.selectAll();
@@ -48,11 +60,26 @@ public class CategoryServiceImpl implements CategoryService {
         return RespVo.success(categoryVoList);
     }
 
+    /**
+     *This method is used to invoke the other findSubCategoryID method without the categories List.
+     * @param id int categoryID
+     * @param resultSet set of results of Integer type.
+     */
+
     @Override
     public void findSubCategoryId(Integer id, Set<Integer> resultSet) {
         List<Category> categories = categoryMapper.selectAll();
         findSubCategoryId(id, resultSet, categories);
     }
+
+    /**
+     * This method finds all the sub-categories of the given category id. The category sub-tree is searched
+     * recursively and a shallow set of all sub categories are collected in the given result set.
+     *
+     * @param id int categoryID
+     * @param resultSet set of results of Integer type
+     * @param categories List of Categories
+     */
 
     private void findSubCategoryId(Integer id, Set<Integer> resultSet, List<Category> categories) {
         for (Category category : categories) {
@@ -63,6 +90,17 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
     }
+
+    /**
+     * 1) For each categoryVo in the given categoryVoList, a new ArrayList of CategoryVo type called subCategoryVoList.
+     * 2) For each category in categories, if the id of categoryVo is equal to the parent id of the category,
+     * category is converted into categoryVo and the categoryVo created is added to the subCategoryVoList.
+     * 3) subCategoryVoList is sorted in descending order
+     * 4) subCategoryList is set to subCategoryVoList
+     * 5) sub categories are recursively queried.
+     * @param categories a List of Categories
+     * @param categoryVoList a List of CategoryVos
+     */
 
     private void findSubCategory(List<Category> categories, List<CategoryVo> categoryVoList) {
         for (CategoryVo categoryVo : categoryVoList) {
@@ -79,6 +117,12 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
     }
+
+    /**
+     * This method converts Category objects to CategoryVo objects.
+     * @param category Category object to be converted
+     * @return CategoryVo object
+     */
 
     private CategoryVo categoryToCategoryVo(Category category) {
         CategoryVo categoryVo = new CategoryVo();
