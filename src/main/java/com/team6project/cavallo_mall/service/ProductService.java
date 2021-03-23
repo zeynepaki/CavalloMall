@@ -15,12 +15,37 @@ import java.util.List;
  */
 public interface ProductService {
 
+    /**
+     * Method that provides a product list as a page
+     * @param categoryId integer representing the categoryID of a product
+     * @param pageNum integer representing the page number
+     * @param pageSize integer representing the number of entries per page
+     * @return a product service query result indicating whether the product list has been successfully returned
+     */
     RespVo<PageInfo> productList(Integer categoryId, Integer pageNum, Integer pageSize);
 
+    /**
+     * Method that provides product details
+     * @param productId integer representing a unique product ID
+     * @return a product service query result indicating whether the product's details have been successfully returned
+     */
     RespVo<ProductDetailsVo> productDetail(Integer productId);
 
+    /**
+     * Method that finds a product's sales quantity
+     * Only permits a successful query where the user is an admin (userRole == 1)
+     * @param categoryId integer that represents a product's category ID
+     * @param userRole integer that represents the user's role (0 for customer, 1 for admin)
+     * @return a product service query result indicating whether the product's sales quantity has been successfully returned
+     */
     RespVo<ProductSalesStatisticVo> findProductSalesQuantity(Integer categoryId, Integer userRole);
 
+    /**
+     * Method that finds product sales quantities and adds them to a List
+     * Only permits a successful query where the user is an admin (userRole == 1)
+     * @param userRole integer that represents the user's role (0 for customer, 1 for admin)
+     * @return a product service query result indicating whether the list of product sales statistics has been successfully returned
+     */
     RespVo<List<ProductSalesStatisticVo>> findProductSalesQuantityList(Integer userRole);
 
 
